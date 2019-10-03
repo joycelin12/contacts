@@ -44,7 +44,7 @@ class App extends Component {
      const {contacts} = this.state	  
      
      return (
-       <div className="App">
+       <div className="container">
 	     <h1>My Contacts</h1>
 	     <Table contactsData={contacts} removeContact={this.removeContact}/>
 	     <Form handleSubmit={this.handleSubmit}/>
