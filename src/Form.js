@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
+//referencing https://codepen.io/bastianalbers/pen/PWBYvz
 
 class Form extends Component {
 	constructor(props) {
@@ -6,15 +8,16 @@ class Form extends Component {
            super(props)
 
 		this.initialState = {
+			id:'',
 			pic: '',
 			first: '',
 			last: '',
 			phone: '',
-			email: ''
+			email: '',
 		}
 
 		this.state = this.initialState
-
+	
 	}
 
 	handleChange = event => {
@@ -28,27 +31,41 @@ class Form extends Component {
 	submitForm = (event) => {
 		event.preventDefault();
 		this.props.handleSubmit(this.state);
+		this.props.closeContact();
 		this.setState(this.initialState);
 	}
 
-	render() {
-              const { pic, first, last, phone, email} = this.state;
+	cancelForm = (event) => {
+		event.preventDefault();
+		this.props.closeContact();
+	}
 
-		return(
+	render() {
+                const { id, pic, first, last, phone, email} = this.state;
+		
+		if (this.props.showModal) {
+		 return (
+			<div className ='popup'> 			
+			 <div className ='popup_inner'>
 			<form onSubmit={this.submitForm} >
 			<table>
 			<tr>
 			<td>
-			Cancel
+	                <button onClick={this.cancelForm} >Cancel</button>
 			</td>
+			 <td></td>
 			<td>
 			<button type="submit" >Save</button>
 			</td>
 			</tr>
 			<tr>
-                        <td>pic</td>
+                        <td><div className="circle">Add Photo</div></td>
 			<tr>
-			<td>
+			<td  className="pop">
+			<input 
+			type= "hidden"
+			name= "id"
+			value= {Date.now()}/>
 			<input 
 			type= "text"
 			name= "first"
@@ -56,9 +73,10 @@ class Form extends Component {
 			value= {first}
 			onChange =  {this.handleChange} />
 			</td>
+			<td></td>
 			</tr>
 			<tr>
-			<td>
+			<td  className="pop">
 			<input 
 			type= "text"
 			name= "last"
@@ -66,13 +84,14 @@ class Form extends Component {
 			value= {last}
 			onChange =  {this.handleChange} />
 			</td>
+			<td></td> 
 			</tr>
 			</tr>
 			<tr>
-			<td>
+			<td  className="pop">
 			<label>phone:</label>
 			</td>
-			<td>
+			<td  className="pop">
 			<input 
 			type= "text"
 			name= "phone"
@@ -80,12 +99,13 @@ class Form extends Component {
 			value= {phone}
 			onChange =  {this.handleChange} />
 			</td>
+			<td></td> 
 			</tr>
 			<tr>
-			<td>
+			<td  className="pop">
 			<label>e-mail:</label>
 			</td>
-			<td>
+			<td  className="pop">
 			<input 
 			type= "email"
 			name= "email"
@@ -93,12 +113,19 @@ class Form extends Component {
 			value= {email}
 			onChange =  {this.handleChange} />
 			</td>
+			 <td></td>
 			</tr>
 			</table>
 			</form>
+                         </div> 
+			 </div>
+		 )
+		} else {
+                   return null;
+		}
 
-		)
 	}
-}
+  }
+
 
 export default Form;

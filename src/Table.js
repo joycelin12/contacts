@@ -6,15 +6,18 @@ const TableBody = props => {
 
       return(
             <tr key={index}>
-            <td>{row.pic}</td>
+            <td ><div className="circle2">{row.pic}</div></td>
             <tr>
             <td>{row.first} {row.last}</td>
             </tr>
             <tr>
             <td>{row.email}</td>
 	    </tr>
+	     <td>
+              <img src="/edit.png" onClick={() =>props.editContact(index,row)} alt="Edit"/>
+	      </td>    
 	    <td>
-              <button onClick={() => props.removeContact(index)}>X</button>
+	      <img src="/cross.png" onClick={() => props.removeContact(index)} alt="Delete"/>
 	      </td>  
           </tr>
          )
@@ -27,11 +30,11 @@ const TableBody = props => {
 class Table extends Component {
 
    render() {
-	   const {contactsData, removeContact} = this.props
-
-          return (
+	  const {contactsData, removeContact, editContact} = this.props
+          
+	   return (
 		  <table>
-		  <TableBody contactsData={contactsData} removeContact={removeContact} />
+		  <TableBody contactsData={contactsData} removeContact={removeContact} editContact={editContact}  />
 		  </table>
           	  )
    }
