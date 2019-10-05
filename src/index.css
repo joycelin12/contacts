@@ -717,7 +717,7 @@ a.full-button {
   outline: none;
   background: transparent;
   margin-bottom: .5rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   width: 100%;
   max-width: 100%;
   line-height: 1; }
@@ -757,7 +757,7 @@ select::-ms-expand {
   width: 100%; }
 
 label {
-  font-weight: 600;
+  font-weight: 300;
   max-width: 100%;
   display: block;
   margin: 1rem 0 .5rem; }

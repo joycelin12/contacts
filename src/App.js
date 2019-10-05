@@ -59,8 +59,30 @@ class App extends Component {
                 email: row.email})	
   }
   
-  updateHandle = contact => {
-       this.setState({ contacts: [...this.state.contacts, contact]})
+  updateHandle = (contact) => {
+         this.setState({
+		    contacts :this.state.contacts.map(index => {
+                           if(index.id === this.state.id) {  
+							  
+				   index['pic'] = contact.pic;
+				   index['first'] = contact.first;
+				   index['last'] = contact.last;
+				   index['phone'] = contact.phone;
+                                   index['email'] = contact.email;
+				   return index;
+                               
+			   }
+			    return index;
+		    })
+
+            
+	    })
+
+
+	   this.setState({
+            showEdit: false
+	   })
+	  	  	  
   }
   
  	

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 //referencing https://codepen.io/bastianalbers/pen/PWBYvz
+//referencing https://stackoverflow.com/questions/53921667/reactjs-component-structure-form-inside-modal for the popup
+//referencing https://stackoverflow.com/questions/51002481/images-not-loading-when-deploying-to-github-pages for displaying images
+// referencing this https://www.freecodecamp.org/news/crud-using-react-41d047224e26/ to do the update
 
 class EditForm extends Component {
 	
@@ -27,6 +30,9 @@ class EditForm extends Component {
 	handleChange = event => {
 		const { name, value } = event.target
 
+		console.log("name" + name);
+		console.log("value" + value);
+		
 		this.setState({
                    [name] : value,
 		})
@@ -44,60 +50,25 @@ class EditForm extends Component {
 		this.props.closeContact();
 	}
 
-	EditHandleForm = (event) => {
-
+	EditSubmitForm = (event) => {
+           
             event.preventDefault();
-            this.setState({
-		    contacts :this.state.contacts.map(index => {
-                           if(index.id === this.state.id) {  
-
-				   console.log('pic' + event.target.pic.value );
-			   	    console.log('first' + event.target.first.value );
-				      console.log('last' + event.target.last.value );
-				      console.log('phone' + event.target.phone.value );
-				      console.log('email' + event.target.email.value ); 	  
-
-				   index['pic'] = event.target.pic.value;
-				   index['first'] = event.target.first.value;
-				   index['last'] = event.target.last.value;
-				   index['phone'] = event.target.phone.value;
-                                   index['email'] = event.target.phone.value;
-				   return index;
-                               
-			   }
-			    return index;
-		    })
-
-            
-	    })
-
-
-	  this.setState({
-            showEdit: false
-	   })
-	   this.props.closeContact();
-	   this.setState(this.initialState);
+	    this.props.updateHandle(this.state);
+	    this.props.closeContact();
+	    this.setState(this.initialState);
 	
+            	
 	}	
 
 	render() {
 
 		 const {showEdit, id, pic, first, last, phone, email} = this.props.showEdit;
-		 console.log(showEdit.showEdit + " showedit only");
-		  console.log(showEdit.id + " id only");	                
+	
 		if (showEdit) {
-	/*	  console.log(this.props.showEdit.showEdit +"edit");
-		  console.log(this.props.showEdit.contact.first +"first");
-		  console.log(this.props.showEdit.contact.last +"last");
-		  console.log(this.props.showEdit.contact.phone +"phone");
-		  console.log(this.props.showEdit.contact.email +"contact");
-			
-		
-		 console.log(this.props.first + "testing first");*/	
-		 return (
+			 return (
 			<div className ='popup'> 
 			 <div className ='popup_inner'>
-		        <form onSubmit={this.EditHandleForm.bind(this)} >
+		        <form onSubmit={this.EditSubmitForm.bind(this)} >
 			<table>
 			<tbody> 
 			<tr>
@@ -120,8 +91,8 @@ class EditForm extends Component {
 			<input 
 			type= "text"
 			name= "first"
-			value= {first}
-			 onChange =  {this.handleChange} />
+			defaultValue= {first}
+			onChange =  {this.handleChange} />
 			</td>
 			</tr>
 			<tr>
@@ -129,7 +100,7 @@ class EditForm extends Component {
 			<input 
 			type= "text"
 			name= "last"
-		        value= {last}
+		        defaultValue= {last}
 			onChange =  {this.handleChange} />
 			</td>
 			</tr>
@@ -142,7 +113,7 @@ class EditForm extends Component {
 			<input 
 			type= "text"
 			name= "phone"
-		        value= {phone}
+		        defaultValue = {phone}
 			onChange =  {this.handleChange} />
 			</td>
 			</tr>
@@ -154,7 +125,7 @@ class EditForm extends Component {
 			<input 
 			type= "email"
 			name= "email"
-		        value= {email}
+		        defaultValue = {email}
 			onChange =  {this.handleChange} />
 			</td>
 			</tr>
