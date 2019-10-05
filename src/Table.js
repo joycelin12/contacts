@@ -14,10 +14,10 @@ const TableBody = props => {
             <td>{row.email}</td>
 	    </tr>
 	     <td>
-              <img src="/edit.png" onClick={() =>props.editContact(index,row)} alt="Edit"/>
+              <img src="./edit.png" onClick={() =>props.editContact(index,row)} alt="Edit"/>
 	      </td>    
 	    <td>
-	      <img src="/cross.png" onClick={() => props.removeContact(index)} alt="Delete"/>
+	      <img src="./cross.png" onClick={() => props.removeContact(index)} alt="Delete"/>
 	      </td>  
           </tr>
          )
